@@ -12,6 +12,9 @@ contract mappingCites {
     
     function get(string memory _name) public view returns (string memory){
         return cities[_name];
+     }
+        function removeCity(string memory _name) public {
+        delete(city[_name]);
     }
   
 }
