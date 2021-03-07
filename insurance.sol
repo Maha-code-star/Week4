@@ -27,10 +27,6 @@ contract TechInsurance is ERC721("NinjaToekn","Ninja") {
         _;
         
     }
-   modifier TimeCheck {
-        require(block.timestamp <= timelocked + 10 minutes);
-        _;
-   } 
 
 
     mapping(uint => Product) public productIndex;
