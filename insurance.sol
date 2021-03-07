@@ -51,6 +51,7 @@ contract TechInsurance is ERC721("NinjaToekn","Ninja") {
         
     
     }
+     contract MyToken is ERC721{
    function mint(address to, uint256 tokenId) public internal  {
     require(_to != address(0));
   } 
