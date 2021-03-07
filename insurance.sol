@@ -88,6 +88,10 @@ contract TechInsurance is ERC721("NinjaToekn","Ninja") {
         client[msg.sender][_productIndex]= NewClient;
         payable(msg.sender).transfer(msg.value);
     } 
+      function transferID( address to, uint256 tokenId) public  {
+        require(ownerOf(tokenId) == msg.sender,"only owner" );
+        _transfer(msg.sender, to, tokenId);
+    }
     
 
     
