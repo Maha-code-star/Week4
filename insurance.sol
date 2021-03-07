@@ -81,4 +81,4 @@ contract TechInsurance is ERC721("NinjaToekn","Ninja") {
     
     
   
-}
+
