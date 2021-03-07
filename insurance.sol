@@ -21,35 +21,44 @@ contract TechInsurance is ERC721("NinjaToekn","Ninja") {
         bool isValid;
         uint time;
     }
-    
-    
+
+    modifier OnlyinsOwner (uint ){
+        require(msg.sender == Owner);
+        _;
+        
+    }
+   modifier TimeCheck {
+        require(block.timestamp <= timelocked + 10 minutes);
+        _;
+   } 
+
+
     mapping(uint => Product) public productIndex;
     mapping(address => mapping(uint => Client)) public client;
-    
     uint productCounter;
 
-    address  insOwner;
-    constructor() public{
-     insOwner = msg.sender;
-    }
+    address payable insOwner;
+
+    //constructor(address payable ) public{
+     //insOwner = msg.sender;
+    //}
  
     function addProduct(uint _productId, string memory _productName, uint _price ) public {
-    
-        Product memory NewProduct = Product (_productId , _productName , _price , true);
-        productIndex [productCounter++] = NewProduct;
-        
+      productCounter++;
+      address insOwner  = msg.sender; 
+      productIndex [productCounter] = Product (_productId , _productName , _price , true);
+       
     
     }
+
      contract MyToken is ERC721{
    function _mint(address to, uint256 tokenId) internal  {
         require(to != address(0), "ERC721: mint to the zero address");
         require(!_exists(tokenId), "ERC721: token already minted")
-        
-
+    
         _balances[to] += 1;
         _owners[tokenId] = to;
-
-        emit Transfer(address(0), to, tokenId);
+       emit Transfer(address(0), to, tokenId);
     }
   } 
     
@@ -61,7 +70,7 @@ contract TechInsurance is ERC721("NinjaToekn","Ninja") {
     
     function forOffer(uint _productIndex) public returns(bool) {
         require(msg.sender == insOwner,"Yes Offer");
-        return productIndex[_productIndex].offered = true;
+        productIndex[_productIndex].offered = true;
 
     }
     
@@ -72,13 +81,15 @@ contract TechInsurance is ERC721("NinjaToekn","Ninja") {
   
     
     function buyInsurance(uint _productIndex) public payable {
-        require(productIndex[_productIndex].price == msg.value);
+        require( productIndex[_productIndex].price == msg.value);
+        doNotOffer(_productIndex);
         Client memory NewClient;
         NewClient.isValid=true;
         client[msg.sender][_productIndex]= NewClient;
         payable(msg.sender).transfer(msg.value);
     } 
     
+
     
   
 
