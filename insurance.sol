@@ -34,6 +34,7 @@ contract TechInsurance is ERC721("NinjaToekn","Ninja") {
     }
  
     function addProduct(uint _productId, string memory _productName, uint _price ) public {
+    
         Product memory NewProduct = Product (_productId , _productName , _price , true);
         productIndex [productCounter++] = NewProduct;
         
