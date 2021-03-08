@@ -22,7 +22,7 @@ contract TechInsurance is ERC721("NinjaToekn","Ninja") {
         uint time;
     }
 
-    modifier OnlyinsOwner (uint ){
+    modifier OnlyinsOwner {
         require(msg.sender == Owner);
         _;
         
