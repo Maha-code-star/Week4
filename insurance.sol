@@ -35,9 +35,7 @@ contract TechInsurance is ERC721("NinjaToekn","Ninja") {
 
     address payable insOwner;
 
-    //constructor(address payable ) public{
-     //insOwner = msg.sender;
-    //}
+ 
  
     function addProduct(uint _productId, string memory _productName, uint _price ) public {
       productCounter++;
@@ -46,8 +44,6 @@ contract TechInsurance is ERC721("NinjaToekn","Ninja") {
        
     
     }
-
-     contract MyToken is ERC721{
    function _mint(address to, uint256 tokenId) internal  {
         require(to != address(0), "ERC721: mint to the zero address");
         require(!_exists(tokenId), "ERC721: token already minted");
